@@ -1,3 +1,9 @@
+##update 2017/7/13
+using a plugin————bootstrap datetimepicker to complete the function of time-pick.
+(算了，扯不下去了，还是说中文吧...本来以为这个功能会很难实现，结果在一篇博客的指导，和自己的瞎琢磨下，居然就实现了！
+以后会更新一篇博客，让我下一步做音乐播放器吧～
+
+
 # todolist
 
 > A Vue.js project
