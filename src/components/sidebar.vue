@@ -12,7 +12,7 @@
           <div v-for="(item,index) in items" class="panel panel-default">
             <div class="panel-heading">
               <h4>
-                <input @click="itemCheck(index)" type="checkbox">
+                <input @click="itemCheck(index)" type="checkbox" v-bind:checked="item.isFinished">
                 {{item.task}}
                 <i class="glyphicon glyphicon-remove pull-right" v-on:click="deleteTask(index)"></i>
                 <i class="glyphicon glyphicon-edit pull-right" v-on:click="clickTask(item)"></i>
@@ -20,7 +20,9 @@
             </div>
             <div class="panel-body">
               <p>
-                {{item.setTime}}<br>
+                {{item.setTime}}
+              </p>
+              <p>
                 {{item.details}}
               </p>
             </div>

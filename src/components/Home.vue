@@ -8,7 +8,7 @@
       </div>
       <div class="col-sm-4">
         <div class="jumbotron">
-          <h2>欢迎你！</h2>
+          <h1>欢迎！</h1>
           <p>这里有你需要的app</p>
         </div>
       </div>

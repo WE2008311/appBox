@@ -33,7 +33,7 @@ const mutations={
         }else{
             d=dd;
         }
-        var currentTime=y+m+d;
+        var currentTime=y+'-'+m+'-'+d;
         state.items.push({
             task,
             isFinished:false,

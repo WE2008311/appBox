@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="text-left">任务编辑</h3>
+        <h4 class="text-left">任务编辑</h4>
       </div>
       <div class="panel-body">
          <p>任务名称</p>
@@ -10,7 +10,10 @@
          <p>任务详情</p>
          <textarea class="form-control details-input" rows="3" placeholder="任务详情" v-bind:value="details" v-on:input="saveDetails"></textarea>
          <p>任务期限</p>
-         <input type="text" class="form-control settime-input" placeholder="格式：20170606" v-bind:value="setTime" v-on:input="saveSettime">
+         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+            <input class="form-control settime-input" type="text" v-bind:value="setTime">
+		        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+         </div>
          <h3><i class="glyphicon glyphicon-ok pull-right" v-on:click="save"></i></h3>
       </div>
     </div>
@@ -49,15 +52,33 @@
       saveDetails(e){
         this.detailsInput=e.target.value;
       },
-      saveSettime(e){
-        this.settimeInput=e.target.value;
-      },
       save(){
         this.$store.commit('editTask',this.taskInput);
         this.$store.commit('editDetails',this.detailsInput);
         this.$store.commit('editSettime',this.settimeInput);
         this.$store.commit('clearAll');
+      },
+      dateDefind(){
+        var self=this;
+        $('.form_date').datetimepicker({
+          language:  'zh-CN',
+          format:'yyyy-mm-dd',
+          weekStart: 1,
+          todayBtn:  1,
+		      autoclose: 1,
+	      	todayHighlight: 1,
+	      	startView: 2,
+	      	minView: 2,
+	      	forceParse: 0
+        }),
+        $('.form_date').datetimepicker()
+        .on('hide',function(e){
+          self.settimeInput=$('.settime-input').val();
+        })
       }
+    },
+    mounted:function(){
+      this.dateDefind();
     }
   }
 
