@@ -13,6 +13,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import $ from 'jquery'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
+import './bootstrap-datetimepicker/bootstrap-datetimepicker.min.css'
+import './bootstrap-datetimepicker/bootstrap-datetimepicker.min.js'
+import './bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js'
+
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
