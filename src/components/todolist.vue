@@ -45,6 +45,7 @@ export default {
 
 <style scoped>
   .addInput {
+    margin-top: .8rem;
     margin-bottom: .75rem;
   }
 </style>

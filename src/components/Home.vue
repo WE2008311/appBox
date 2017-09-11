@@ -9,7 +9,7 @@
       <div class="col-sm-4">
         <div class="jumbotron">
           <h1>欢迎！</h1>
-          <p>这里有你需要的app</p>
+          <p>这里有你需要的应用</p>
         </div>
       </div>
     </div>
@@ -30,6 +30,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .container{
+    padding-top: .8rem;
+  }
   .col-sm-8 .jumbotron{
     padding: 0;
   }

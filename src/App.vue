@@ -13,8 +13,9 @@
           <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-home"></i></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><router-link to="/todolist">Todo List</router-link></li>
+          <ul class="nav navbar-nav" >
+            <li><router-link @click.native="toggle" to="/todolist">iTodo</router-link></li>
+            <li><router-link @click.native="toggle" to="/player">iPlayer</router-link></li>
             <li><a href="#">开发中...</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -35,11 +36,17 @@ export default {
     return{
       
     }
+  },
+  methods:{
+    toggle(){
+      $('.navbar-collapse').collapse('toggle');
+    }
   }
 }
 </script>
-
-<style>
-
-
+  
+<style scope>
+  .navbar{
+    margin-bottom: 0!important;
+  }
 </style>

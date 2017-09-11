@@ -59,7 +59,11 @@ module.exports = {
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
+        },
+      },
+      {
+        test:/\.less$/,
+        loader:"style-loader!css-loader!less-loader"
       }
     ]
   }
