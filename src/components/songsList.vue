@@ -65,9 +65,9 @@ export default {
       window.history.go(-1);
     },
     getSong(id,name,singer,album,arid){
-      this.$store.commit('getSong',{id,name,singer,album,arid});
-      this.$store.commit('play');
-      
+      this.$store.dispatch('getSong',{id,name,singer,album,arid});
+      debugger;
+      this.$store.dispatch('play',true);
     }
   }
 }

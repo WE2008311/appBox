@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as types from './type'
 
 Vue.use(Vuex);
 
@@ -119,7 +120,8 @@ const mutations={
     },
 
     // iPlayer
-    play(state){
+    [types.PLAY](state){
+        debugger;
         clearInterval(ctime);
         const playerBar=document.getElementById("playerBar");
         const eve=$('.addPlus i')[0];
@@ -132,6 +134,7 @@ const mutations={
         state.audio.progressPercent=((playerBar.currentTime/playerBar.duration)*100).toFixed(1);
         
         if(playerBar.paused){
+            console.log(playerBar);
             playerBar.play();
             eve.innerHTML="pause";
             state.audio.duration=duraMinute;
@@ -182,7 +185,7 @@ const mutations={
 
         let duraTime=playerBar.duration;
         let duraMinute=Math.floor(duraTime/60)+":"+(duraTime%60/100).toFixed(2).slice(-2);
-        // console.log(progressValue);
+        
         clearInterval(ctime);
         if(playerBar.paused){
             playerBar.play();
@@ -205,7 +208,7 @@ const mutations={
             },1000
         )
 
-        // console.log(currentTime);
+        
         playerBar.currentTime=currentTime;
         
         let currentMinute=Math.floor(currentTime/60)+":"+(currentTime%60/100).toFixed(2).slice(-2);
@@ -227,14 +230,16 @@ const mutations={
         })
         
     },
-    getSong(state,{id,name,singer,album,arid}){
+
+    [types.GET_SONG](state,{id,name,singer,album,arid}){
+        debugger;
         const url="http://localhost:3000/music/url?id="+id;
         const imgUrl="http://localhost:3000/artist/album?id="+arid;
         const playerBar=document.getElementById("playerBar");
         
 
         axios.get(url).then(res=>{
-            
+            debugger;
             state.audio.location=res.data.data[0].url;
             state.audio.flag=res.data.data[0].flag;
             
@@ -247,9 +252,11 @@ const mutations={
         })
         
         let currentTime=playerBar.currentTime;
+
         let currentMinute=Math.floor(currentTime/60)+":"+(currentTime%60/100).toFixed(2).slice(-2);
         let duraTime=playerBar.duration;
         let duraMinute=Math.floor(duraTime/60)+":"+(duraTime%60/100).toFixed(2).slice(-2);
+        
 
         state.audio.duration=duraMinute;
         state.audio.currentTime=currentMinute;
@@ -258,6 +265,14 @@ const mutations={
         
     }
     
+}
+const actions={
+    play({commit}){
+        commit(types.PLAY)
+    },
+    getSong({commit},{id,name,singer,album,arid}){
+        commit(types.GET_SONG,{id,name,singer,album,arid})
+    }
 }
 
 const localStoragePlugin = store=>{
@@ -271,5 +286,6 @@ export default new Vuex.Store({
   state,
   getters,
   mutations,
+  actions,
   plugins:[localStoragePlugin]
 })
