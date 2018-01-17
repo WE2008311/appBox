@@ -1,6 +1,6 @@
-# y
+# appBox
 
-> y
+> this is a box with 2 apps。include a music player and a todolist program。It's a practice for increase my vue skills，if you like it，plz fork it or give me a star。
 
 ## Build Setup
 
