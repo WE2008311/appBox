@@ -121,7 +121,7 @@ const mutations={
 
     // iPlayer
     [types.PLAY](state){
-        debugger;
+        
         clearInterval(ctime);
         const playerBar=document.getElementById("playerBar");
         const eve=$('.addPlus i')[0];
@@ -129,18 +129,27 @@ const mutations={
         
         let currentTime=playerBar.currentTime;
         let currentMinute=Math.floor(currentTime/60)+":"+(currentTime%60/100).toFixed(2).slice(-2);
-        let duraTime=playerBar.duration;
-        let duraMinute=Math.floor(duraTime/60)+":"+(duraTime%60/100).toFixed(2).slice(-2);
+        
+        var duraMinute;
+
+
+        playerBar.oncanplay=()=>{
+            duraMinute=Math.floor(playerBar.duration/60)+":"+(playerBar.duration%60/100).toFixed(2).slice(-2);
+            state.audio.duration=duraMinute;
+        }
+        
         state.audio.progressPercent=((playerBar.currentTime/playerBar.duration)*100).toFixed(1);
         
         if(playerBar.paused){
-            console.log(playerBar);
+            
+
             playerBar.play();
             eve.innerHTML="pause";
+            
             state.audio.duration=duraMinute;
             state.audio.currentTime=currentMinute;
             ctime=setInterval(
-                function(){
+                ()=>{
                     
                     currentTime++;
                     
@@ -196,7 +205,7 @@ const mutations={
         
         
         ctime=setInterval(
-            function(){
+            ()=>{
                 
                 currentTime++;
                 
@@ -231,47 +240,37 @@ const mutations={
         
     },
 
-    [types.GET_SONG](state,{id,name,singer,album,arid}){
-        debugger;
+    
+    
+}
+const actions={
+    getSong({commit},{id,name,singer,album,arid}){
         const url="http://localhost:3000/music/url?id="+id;
         const imgUrl="http://localhost:3000/artist/album?id="+arid;
         const playerBar=document.getElementById("playerBar");
         
 
+        
         axios.get(url).then(res=>{
-            debugger;
+            
             state.audio.location=res.data.data[0].url;
             state.audio.flag=res.data.data[0].flag;
             
             state.audio.songName=name;
             state.audio.singer=singer;
             state.audio.album=album;
+            
+            
+        }).then(()=>{
+            commit(types.PLAY);
         })
         axios.get(imgUrl).then(res=>{
             state.audio.picUrl=res.data.artist.picUrl;
         })
         
-        let currentTime=playerBar.currentTime;
-
-        let currentMinute=Math.floor(currentTime/60)+":"+(currentTime%60/100).toFixed(2).slice(-2);
-        let duraTime=playerBar.duration;
-        let duraMinute=Math.floor(duraTime/60)+":"+(duraTime%60/100).toFixed(2).slice(-2);
-        
-
-        state.audio.duration=duraMinute;
-        state.audio.currentTime=currentMinute;
-        state.audio.progressPercent=((playerBar.currentTime/playerBar.duration)*100).toFixed(1);
-        
-        
-    }
-    
-}
-const actions={
-    play({commit}){
-        commit(types.PLAY)
     },
-    getSong({commit},{id,name,singer,album,arid}){
-        commit(types.GET_SONG,{id,name,singer,album,arid})
+    play({commit}){
+        commit(types.PLAY);
     }
 }
 

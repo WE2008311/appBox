@@ -66,8 +66,9 @@ export default {
     getSong(id,name,singer,album,arid){
       
       
-      this.$store.commit('getSong',{id,name,singer,album,arid});
-      this.$store.commit('play');
+      this.$store.dispatch('getSong',{id,name,singer,album,arid});
+      
+      
     }
     
   }

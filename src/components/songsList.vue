@@ -66,8 +66,8 @@ export default {
     },
     getSong(id,name,singer,album,arid){
       this.$store.dispatch('getSong',{id,name,singer,album,arid});
-      debugger;
-      this.$store.dispatch('play',true);
+      
+      
     }
   }
 }
